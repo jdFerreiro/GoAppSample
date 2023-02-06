@@ -7,8 +7,8 @@ import (
 )
 
 type Tweet struct {
-	ID          primitive.ObjectID `bson:"_id" json:"id,omitempty"`
-	UserId      primitive.ObjectID `bson:"userid" json:"userid,omitempty"`
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	UserId      string             `bson:"userid" json:"userid,omitempty"`
 	Message     string             `bson:"message" json:"message"`
 	MessageDate time.Time          `bson:"messagedate" json:"messagedate,omitempty"`
 }

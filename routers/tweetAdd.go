@@ -7,7 +7,6 @@ import (
 
 	"github.com/jdferreiro/GoAppSample/bd"
 	"github.com/jdferreiro/GoAppSample/models"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 /* TweetAdd - add new tweet in DB */
@@ -24,10 +23,8 @@ func TweetAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	objUserID, _ := primitive.ObjectIDFromHex(UserID)
-
 	dataTweet := models.Tweet{
-		UserId:      objUserID,
+		UserId:      UserID,
 		Message:     t.Message,
 		MessageDate: time.Now().UTC(),
 	}

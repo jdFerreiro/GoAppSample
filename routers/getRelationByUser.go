@@ -8,8 +8,8 @@ import (
 	"github.com/jdferreiro/GoAppSample/bd"
 )
 
-/* GetTweetsByUser - Get tweets by user Id */
-func GetTweetsByUser(w http.ResponseWriter, r *http.Request) {
+/* GetRelationsByUser - Get tweets by user Id */
+func GetRelationsByUser(w http.ResponseWriter, r *http.Request) {
 	userID := r.URL.Query().Get("userId")
 	if len(userID) < 1 {
 		http.Error(w, "User ID not get", http.StatusBadRequest)
@@ -41,7 +41,7 @@ func GetTweetsByUser(w http.ResponseWriter, r *http.Request) {
 	page := int64(pageNumber)
 	limit := int64(recordLimit)
 
-	tweets, fail, err := bd.GetTweet(userID, page, limit)
+	relations, fail, err := bd.GetUserRelations(userID, page, limit)
 	if fail {
 		http.Error(w, "Falló."+err.Error(), 400)
 		return
@@ -49,5 +49,5 @@ func GetTweetsByUser(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("context-type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(tweets)
+	json.NewEncoder(w).Encode(relations)
 }
